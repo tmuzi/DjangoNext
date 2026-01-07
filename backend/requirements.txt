@@ -1,3 +1,6 @@
 Django==5.2.10
 djangorestframework
-pysqlite3-binary
+python-dotenv
+django-environ
+dj-database-url
+psycopg2-binary==2.9.11

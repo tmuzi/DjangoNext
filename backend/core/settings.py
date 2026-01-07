@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
+from dotenv import load_dotenv
+import dj_database_url
+
+env = environ.Env()
+load_dotenv()  # Load environment variables from .env file
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -75,11 +81,23 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+remote = env('REMOTE_DB', default=False)
+if remote:
+    db_url = env('DATABASE_URL', default=None)  # Get raw string instead
+
+    if db_url:
+        DATABASES = {
+            'default': dj_database_url.parse(db_url, conn_max_age=600)
+        }
+    else:
+        raise ValueError("DATABASE_URL environment variable not set for remote database configuration.")
+
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
 }
 
 
@@ -123,3 +141,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+print("Remote DB:", remote)
