@@ -20,6 +20,16 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+**Environment**
+
+Add an `.env.local` with your API base (used by client-side fetches):
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+```
+
+Optionally set `DJANGO_API_URL` as a server-only env if your deployment provides a different internal URL for server-side fetches.
+
 
 ## Build & deploy
 

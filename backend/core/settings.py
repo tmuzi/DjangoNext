@@ -52,10 +52,12 @@ INSTALLED_APPS = [
 
     'whitenoise.runserver_nostatic',  # for serving static files in production
     'rest_framework',
+    'corsheaders',  # CORS support for API access from frontend
     'api',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # must be high in the stack
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -65,6 +67,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CORS settings - during development allow the frontend dev server
+# In production you should restrict these via environment variables
+CORS_ALLOW_ALL_ORIGINS = True
+# Alternatively, you can use:
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+# ]
 
 ROOT_URLCONF = 'core.urls'
 

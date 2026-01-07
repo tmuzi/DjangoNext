@@ -1,6 +1,21 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
+import { getHello } from "../lib/api";
 
 export default function Home() {
+  const [message, setMessage] = useState<string>("Default message");
+
+  async function handleClick() {
+    try {
+      const data = await getHello();
+      setMessage(data.message);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setMessage(`Error: ${msg}`);
+    }
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
@@ -18,7 +33,11 @@ export default function Home() {
             Hello World from Next.js App Router!
           </h1>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            API Calling coming soon...
+            <button onClick={handleClick} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Press</button> to fetch message from
+            Django REST API:
+          </p>
+          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+            {message}
           </p>
         </div>
       </main>
