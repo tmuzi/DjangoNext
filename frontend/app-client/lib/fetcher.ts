@@ -55,7 +55,7 @@ const createAuthenticatedApi = async () => {
     });
 };
 
-export const fetcher = async (url: string): Promise<unknown> => {
+export const fetcher = async <T = unknown>(url: string): Promise<T> => {
   const api = await createAuthenticatedApi();
-  return api.get(url).json();
+  return api.get(url).json() as Promise<T>;
 };

@@ -7,11 +7,16 @@ import { AuthActions } from "@/app/auth/utils";
 import { removeTokens, getTokens } from "@/app/auth/actions";
 import { useRouter } from "next/navigation";
 
+interface User {
+  username: string;
+  email: string;
+}
+
 export default function Home() {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
-  const { data: user, isLoading } = useSWR("/auth/users/me", fetcher);
+  const { data: user, isLoading } = useSWR("/auth/users/me", fetcher<User>);
 
   const { logout } = AuthActions();
 
