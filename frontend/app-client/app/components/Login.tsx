@@ -106,9 +106,9 @@ const Login = () => {
         <div className="mt-6 text-center">
           <Link
             href="/auth/password/reset-password"
-            className="text-sm text-blue-600 hover:text-blue-500"
+            className="text-sm text-zinc-400 dark:text-zinc-500"
           >
-            Forgot password?
+            Forgot password? (Coming soon)
           </Link>
         </div>
         <p className="mt-4 text-center text-sm text-zinc-600 dark:text-zinc-400">

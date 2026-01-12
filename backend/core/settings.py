@@ -180,23 +180,24 @@ SIMPLE_JWT = {
 
 # Email Configuration - Brevo (Sendinblue) SMTP
 # Set USE_CONSOLE_EMAIL=True in .env for development to print emails to console
-if env.bool('USE_CONSOLE_EMAIL', default=True):
-    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-else:
-    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = "smtp-relay.brevo.com"
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = env('BREVO_SMTP_USER', default='')
-    EMAIL_HOST_PASSWORD = env('BREVO_SMTP_PASSWORD', default='')
+# Commented out for now - email not working
+# if env.bool('USE_CONSOLE_EMAIL', default=True):
+#     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# else:
+#     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#     EMAIL_HOST = "smtp-relay.brevo.com"
+#     EMAIL_PORT = 587
+#     EMAIL_USE_TLS = True
+#     EMAIL_HOST_USER = env('BREVO_SMTP_USER', default='')
+#     EMAIL_HOST_PASSWORD = env('BREVO_SMTP_PASSWORD', default='')
 
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@localhost')
+# DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@localhost')
 
 DJOSER = {
-    "PASSWORD_RESET_CONFIRM_URL": "auth/password/reset-password-confirmation/?uid={uid}&token={token}",
-    "ACTIVATION_URL": "auth/activate/{uid}/{token}",
-    "SEND_ACTIVATION_EMAIL": True,
-    "SEND_CONFIRMATION_EMAIL": True,
+    # "PASSWORD_RESET_CONFIRM_URL": "auth/password/reset-password-confirmation/?uid={uid}&token={token}",  # Disabled for now
+    # "ACTIVATION_URL": "auth/activate/{uid}/{token}",  # Disabled for now
+    "SEND_ACTIVATION_EMAIL": False,  # Disabled for now
+    "SEND_CONFIRMATION_EMAIL": False,  # Disabled for now
     "SERIALIZERS": {},
 }
 
