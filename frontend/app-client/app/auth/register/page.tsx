@@ -1,11 +1,11 @@
 "use client";
 
-import HelloWorld from "@/app/components/HelloWorld";
+import Register from "@/app/components/Register";
 
 export default function Home() {
   return (
     <main>
-      <HelloWorld />
+      <Register />
     </main>
   );
 }

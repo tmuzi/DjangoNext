@@ -1,11 +1,11 @@
 "use client";
 
-import HelloWorld from "@/app/components/HelloWorld";
+import ResetPassword from "@/app/components/ResetPassword";
 
 export default function Home() {
   return (
     <main>
-      <HelloWorld />
+      <ResetPassword />
     </main>
   );
 }
