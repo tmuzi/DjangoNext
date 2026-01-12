@@ -6,6 +6,7 @@ import { fetcher } from "@/lib/fetcher";
 import { AuthActions } from "@/app/auth/utils";
 import { removeTokens, getTokens } from "@/app/auth/actions";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/components/Loading";
 
 interface User {
   username: string;
@@ -36,14 +37,7 @@ export default function Home() {
   };
 
   if (isLoading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-        <div className="flex flex-col items-center gap-4">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-blue-600 border-t-transparent"></div>
-          <p className="text-zinc-600 dark:text-zinc-400">Loading...</p>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (
