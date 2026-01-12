@@ -55,6 +55,11 @@ const createAuthenticatedApi = async () => {
     });
 };
 
+// For unprotected/public endpoints - no auth needed
+export const publicFetcher = <T = unknown>(url: string): Promise<T> =>
+  fetch(`${API_BASE_URL}${url}`).then(res => res.json());
+
+// For protected endpoints - includes auth and token refresh
 export const fetcher = async <T = unknown>(url: string): Promise<T> => {
   const api = await createAuthenticatedApi();
   return api.get(url).json() as Promise<T>;

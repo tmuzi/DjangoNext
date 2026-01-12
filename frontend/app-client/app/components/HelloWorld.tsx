@@ -1,14 +1,14 @@
 "use client";
 
 import useSWR from "swr";
-import { fetcher } from "@/lib/fetcher";
-import { useRouter } from "next/navigation";
+import { publicFetcher } from "@/lib/fetcher";
+
+interface HelloResponse {
+  message: string;
+}
 
 const HelloWorld = () => {
-  const router = useRouter();
-
-  //const { data: message } = useSWR("/api/hello", fetcher);
-  const message = "Comming Soon!!";
+  const { data, isLoading } = useSWR("/api/hello", publicFetcher<HelloResponse>);
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -17,7 +17,7 @@ const HelloWorld = () => {
                     Hello World from Next.js App Router!
                 </h1>
                 <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-                    Here is a message from the API: {message}. (Test /dashboard for auth!!!)
+                    Here is a message from the API: {isLoading ? "Loading..." : data?.message}
                 </p>
             </div>
         </div>
