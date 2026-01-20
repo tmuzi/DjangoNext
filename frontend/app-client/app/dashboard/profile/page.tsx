@@ -22,6 +22,7 @@ export default function ProfilePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [activationMessage, setActivationMessage] = useState("");
   const router = useRouter();
 
   const {
@@ -61,6 +62,7 @@ export default function ProfilePage() {
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
     setIsSuccess(false);
+    setActivationMessage("");
     try {
       const { accessToken } = await getTokens();
       if (!accessToken) {
@@ -74,6 +76,10 @@ export default function ProfilePage() {
       ).res();
 
       setIsSuccess(true);
+      // Show activation message if email was changed
+      setActivationMessage(
+        "If you changed your email, please check your new inbox to activate your new email address."
+      );
     } catch (err) {
       setError("root", {
         type: "manual",
@@ -101,6 +107,11 @@ export default function ProfilePage() {
         {isSuccess && (
           <div className="mb-6 rounded-md bg-green-50 p-3 text-sm text-green-600 dark:bg-green-900/20 dark:text-green-400">
             Profile updated successfully!
+          </div>
+        )}
+        {activationMessage && (
+          <div className="mb-6 rounded-md bg-blue-50 p-3 text-sm text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
+            {activationMessage}
           </div>
         )}
 

@@ -30,10 +30,12 @@ const Register = () => {
     setSuccessMessage("");
     try {
       await registerUser(data.email, data.username, data.password).res();
-      setSuccessMessage("Account created successfully! Redirecting to login...");
+      setSuccessMessage(
+        "Account created! Please check your email to activate your account before logging in."
+      );
       setTimeout(() => {
         router.push("/auth/login");
-      }, 2000);
+      }, 4000);
     } catch (err) {
       setError("root", {
         type: "manual",
