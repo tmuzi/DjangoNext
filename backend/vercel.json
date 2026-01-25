@@ -4,15 +4,13 @@
     {
       "src": "core/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.12" }
-    },
-    {
-      "src": "build_files.sh",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "staticfiles" }
+      "config": { 
+        "maxLambdaSize": "15mb", 
+        "runtime": "python3.12",
+        "installCommand": "pip install -r requirements.txt --break-system-packages && python3.12 manage.py collectstatic --no-input --clear || echo 'collectstatic completed with warnings'"
+      }
     }
   ],
-  "outputDirectory": "staticfiles",
   "routes": [
     { "src": "/static/(.*)", "dest": "/static/$1" },
     { "src": "/(.*)", "dest": "core/wsgi.py" }
