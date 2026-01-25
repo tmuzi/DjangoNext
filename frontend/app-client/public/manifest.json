@@ -1,6 +1,6 @@
 {
   "name": "DjangoNext",
-  "short_name": "DjangoNext",
+  "short_name": "DjNext",
   "description": "DjangoNext Progressive Web App",
   "start_url": "/",
   "display": "standalone",
@@ -8,11 +8,6 @@
   "theme_color": "#000000",
   "orientation": "portrait-primary",
   "icons": [
-    {
-      "src": "/favicon.ico",
-      "sizes": "any",
-      "type": "image/x-icon"
-    },
     {
       "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
@@ -25,5 +20,6 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "categories": [ "utilities"]
 }
